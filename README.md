@@ -1,3 +1,4 @@
 # Ohjelmistotekniikka, harjoitustyö
-** Tarkoituksena tehdä ** *ohjelmistotekniikan harjoitustyö* 
+**Tarkoituksena tehdä** *ohjelmistotekniikan harjoitustyö* 
 
+linkki laskarit-alihakemistoon
