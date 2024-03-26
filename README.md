@@ -7,4 +7,4 @@
 
 
 #Laskarit
-[Laskarit] (https://github.com/petronellatoikkanen/ot-harjoitustyo/tree/master/laskarit)
+[Laskarit](https://github.com/petronellatoikkanen/ot-harjoitustyo/tree/master/laskarit)
