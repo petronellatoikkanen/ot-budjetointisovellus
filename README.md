@@ -1,8 +1,8 @@
-### Ohjelmistotekniikka, harjoitustyö
+# Ohjelmistotekniikka, harjoitustyö
 **Tarkoituksena tehdä** *ohjelmistotekniikan harjoitustyö* 
 
 
-#Linkit
+## Linkit
 [Dokumentaatio](https://github.com/petronellatoikkanen/ot-harjoitustyo/tree/master/dokumentaatio)
   [Vaatimusmäärittely](https://github.com/petronellatoikkanen/ot-harjoitustyo/tree/master/dokumentaatio/vaatimusmaarittely.md)
   [Työaikakirjanpito](https://github.com/petronellatoikkanen/ot-harjoitustyo/tree/master/dokumentaatio/tuntikirjanpito.md)
