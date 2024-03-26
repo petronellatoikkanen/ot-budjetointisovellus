@@ -1,4 +1,4 @@
-#Vaatimusmäärittely
+###Vaatimusmäärittely
 
 ##Sovelluksen tarkoitus
 - Sovelluksen avulla käyttäjät voivat luoda omia yksityisiä sekä toisten käyttäjien kanssa yhteisiä budjettimalleja eri tarkoituksiin
