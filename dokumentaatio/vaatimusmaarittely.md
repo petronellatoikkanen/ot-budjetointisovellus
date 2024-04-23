@@ -8,7 +8,7 @@
 
 ## Suunnitellut toiminnallisuudet
 ### Ennen kirjautumista
-- Käyttäjä voi luoda järjestelmään user-tason käyttäjätunnuksen
+- Käyttäjä voi luoda järjestelmään user-tason käyttäjätunnuksen (tehty)
 	- Sovellus hyväksyy uniikit, yli viisi merkkiä pitkät käyttäjänimet
 	- Salasanan tulee olla vähintään kahdeksan merkkiä pitkä ja sisältää sekä pieniä, että suuria kirjaimia 
 - Käyttäjä voi olemassa olevilla tunnuksilla kirjautua järjestelmään syöttämällä etusivulle käyttäjätunnuksen ja salasanan

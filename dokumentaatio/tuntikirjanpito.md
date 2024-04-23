@@ -6,3 +6,5 @@
 | 9.4.  |  4   | changelog, invoke, .coveragerc, poetry, ui.py, index.py, tasks.py|
 | 15.4.  |  4   | database_connection, user_repository|
 | 16.4.  |  4   | views, ui, pylint|
+| 22.4.  |  3   | ui, tests, repos, services |
+| 23.4.  |  3   | ui, tests, services |

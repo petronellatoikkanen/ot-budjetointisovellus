@@ -13,11 +13,11 @@ class LoginService:
         if not user or user.password != password:
             print("not ok")
 
-        self._user = user
+        self.user = user
 
         return user
 
     def logout(self):
-        self._user = None
+        self.user = None
 
 

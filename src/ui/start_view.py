@@ -1,5 +1,6 @@
 from tkinter import ttk, constants
 from repositories import user_repository
+from services import login_service
 
 
 class StartView:
@@ -46,7 +47,7 @@ class StartView:
         password = self.password_entry.get()
 
         try:
-            user_repository.login(username, password)
+            login_service.login(username, password)
             self.handle_login()
         except:
             print("Wrong username or password")

@@ -14,6 +14,11 @@
 - lisätty pylint
 
 
+# Viikko 5
+
+- lisätty ja muokattu testejä, repos ja services
+- korjattu ui bugeja
+
 
 
 

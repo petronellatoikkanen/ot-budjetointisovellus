@@ -44,7 +44,9 @@ class UI:
 
         self._current_view = BudgetingView(
             self._root,
-            self.show_start_view
+            self.show_start_view,
+            self.show_budgeting_view,
+
         )
 
         self._current_view.pack()

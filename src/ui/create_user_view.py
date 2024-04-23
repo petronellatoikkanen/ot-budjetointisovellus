@@ -3,10 +3,10 @@ from repositories import user_repository
 
 
 class CreateUserView:
-    def __init__(self, root, handle_create_user, handle_show_login_view):
+    def __init__(self, root, handle_create_user, handle_create_user_view):
         self._root = root
-        self.handle_login = handle_create_user
-        self.handle_create_user_view = handle_show_login_view
+        self.handle_create_user = handle_create_user
+        self.handle_create_user_view = handle_create_user_view
 
         self.frame = None
         self.username_entry = None
@@ -33,7 +33,7 @@ class CreateUserView:
         self.frame.grid_columnconfigure(0, weight=1, minsize=1900)
 
         button = ttk.Button(master=self.frame, text="Create user",
-                            command=self.create_user_handler)
+                            command=self.handle_create_user)
 
         button.grid(padx=5, pady=5, sticky=constants.EW)
 
@@ -46,7 +46,7 @@ class CreateUserView:
             return
 
         try:
-            user_repository.create_user(username, password)
+            self.user_repository.create(username, password)
             self.handle_create_user()
         except:
             print("Username already exists")
