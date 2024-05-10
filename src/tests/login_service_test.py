@@ -19,10 +19,7 @@ class TestLoginService(unittest.TestCase):
 
         self.assertEqual(user, self.user)
 
+    def test_logout(self):
+        user = self.logout()
 
-
-
-
-
-
-
+        self.assertEqual(user, None)

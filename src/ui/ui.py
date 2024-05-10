@@ -1,8 +1,7 @@
-from tkinter import Tk, ttk
 from ui.create_user_view import CreateUserView
-from ui.start_view import StartView
-from ui.create_user_view import CreateUserView
+from ui.login_view import LoginView
 from ui.budgeting_view import BudgetingView
+from ui.budget_view import BudgetView
 
 
 class UI:
@@ -11,16 +10,8 @@ class UI:
         self._current_view = None
 
     def start(self):
-        self.show_start_view()
+        self.show_login_view()
 
-    def create_user_view(self):
-        self._current_view = CreateUserView(
-            self._root,
-            self.show_budgeting_view,
-            self.show_start_view
-        )
-
-        self._current_view.pack()
 
     def hide_current_view(self):
         if self._current_view:
@@ -28,10 +19,10 @@ class UI:
 
         self._current_view = None
 
-    def show_start_view(self):
+    def show_login_view(self):
         self.hide_current_view()
 
-        self._current_view = StartView(
+        self._current_view = LoginView(
             self._root,
             self.show_budgeting_view,
             self.show_create_user_view
@@ -44,12 +35,11 @@ class UI:
 
         self._current_view = BudgetingView(
             self._root,
-            self.show_start_view,
-            self.show_budgeting_view,
-
+            self.show_login_view,
         )
 
         self._current_view.pack()
+
 
     def show_create_user_view(self):
         self.hide_current_view()
@@ -57,7 +47,7 @@ class UI:
         self._current_view = CreateUserView(
             self._root,
             self.show_budgeting_view,
-            self.show_start_view
+            self.show_login_view
         )
 
         self._current_view.pack()

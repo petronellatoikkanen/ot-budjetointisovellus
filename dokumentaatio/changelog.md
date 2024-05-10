@@ -21,4 +21,7 @@
 
 
 
+# Viikko 7
 
+- ohjelman viimeistely
+- dokumentaation täydentäminen

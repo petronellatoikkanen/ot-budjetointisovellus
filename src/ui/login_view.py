@@ -1,13 +1,13 @@
 from tkinter import ttk, constants
-from repositories import user_repository
-from services import login_service
+from repositories.user_repository import user_repository
+from services.login_service import login_service
 
 
-class StartView:
-    def __init__(self, root, handle_login, handle_create_user_view):
-        self._root = root
+class LoginView:
+    def __init__(self, root, handle_login, handle_show_create_user_view):
+        self.root = root
         self.handle_login = handle_login
-        self.handle_create_user_view = handle_create_user_view
+        self.handle_show_create_user_view = handle_show_create_user_view
 
         self.frame = None
         self.username_entry = None
@@ -17,7 +17,7 @@ class StartView:
 
     def start(self):
 
-        self.frame = ttk.Frame(master=self._root)
+        self.frame = ttk.Frame(master=self.root)
 
         username_label = ttk.Label(master=self.frame, text="Username")
         self.username_entry = ttk.Entry(master=self.frame)
@@ -31,26 +31,27 @@ class StartView:
         password_label.grid(padx=5, pady=5, sticky=constants.W)
         self.password_entry.grid(padx=5, pady=5, sticky=constants.W)
 
-        self.frame.grid_columnconfigure(0, weight=1, minsize=1900)
-
-        button1 = ttk.Button(master=self.frame, text="Login",
+        login_button = ttk.Button(master=self.frame, text="Login",
                              command=self.login_handler)
 
-        button2 = ttk.Button(
-            master=self.frame, text="Not a user yet? Register here", command=self.handle_create_user_view)
+        create_user_button = ttk.Button(master=self.frame, text="Not a user yet? Register here", 
+                             command=self.handle_show_create_user_view)
 
-        button1.grid(padx=5, pady=5, sticky=constants.EW)
-        button2.grid(padx=5, pady=5, sticky=constants.EW)
+        self.frame.grid_columnconfigure(0, weight=1, minsize=400)
+        self.frame.grid_columnconfigure(1, weight=0)
+
+        login_button.grid(padx=5, pady=5, sticky=constants.EW)
+        create_user_button.grid(padx=5, pady=5, sticky=constants.EW)
+    
 
     def login_handler(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
 
-        try:
-            login_service.login(username, password)
+        if login_service.login(username, password):
             self.handle_login()
-        except:
-            print("Wrong username or password")
+        else:
+            pass
 
     def pack(self):
         self.frame.pack(fill=constants.X)
