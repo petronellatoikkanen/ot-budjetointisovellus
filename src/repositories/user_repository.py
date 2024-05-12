@@ -1,8 +1,8 @@
 from entities.user import User
 from database_connection import get_database_connection
-    
+
 def get_user_by_row(row):
-    return User(row["username"], row["password"]) if row else None
+    return User(row[1], row[2]) if row else None
 
 
 class UserRepository:
@@ -19,8 +19,10 @@ class UserRepository:
 
         row = cursor.fetchone()
 
-        return get_user_by_row(row)
-    
+        user = get_user_by_row(row)
+
+        return user
+
 
     def create(self, user):
         cursor = self.connection.cursor()
@@ -33,12 +35,11 @@ class UserRepository:
         self.connection.commit()
 
         return user
-    
 
-    def delete_user(self, username):
+    def delete_all(self):
         cursor = self.connection.cursor()
 
-        cursor.execute("delete (username) from users")
+        cursor.execute("delete from users")
 
         self.connection.commit()
 

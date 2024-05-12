@@ -1,28 +1,28 @@
-from entities.user import User
 from entities.budget import Budget
+from entities.expense import Expense
 from database_connection import get_database_connection
-from repositories import user_repository
 
 def get_budget_by_row(row):
-    return Budget(row["budget"], row["user"]) if row else None
+    return Budget(row[1], row[2]) if row else None
 
+def get_expenses_by_row(row):
+    return Expense(row[1], row[2], row[3]) if row else None
 
 class BudgetingRepository:
     def __init__(self, connection):
-        self.user = None
         self.connection = connection
 
-    def find_all(self):
+    def find_all(self, username):
         cursor = self.connection.cursor()
 
         cursor.execute(
-            "select * from budgets"
+            "select from budgets where user = ?",
+            (username,)
         )
 
-        row = cursor.fetchall()
-        print(row)
+        rows = cursor.fetchall()
 
-       # return list(get_budget_by_row(row))
+        return list(map(get_budget_by_row, rows))
 
     def find(self, budget):
         cursor = self.connection.cursor()
@@ -32,18 +32,21 @@ class BudgetingRepository:
             (budget,)
         )
 
-        row = cursor.fetchall()
+        row = cursor.fetchone()
 
-    def find_by_name(self, budget):
+        return get_budget_by_row(row)
+
+    def find_budget_expenses(self, budget):
         cursor = self.connection.cursor()
 
         cursor.execute(
-            "select * from budgets where user = ?",
-            (budget)
+            "select * from expenses where budget = ?",
+            (budget,)
         )
 
-        row = cursor.fetchall()
+        rows = cursor.fetchall()
 
+        return list(map(get_expenses_by_row, rows))
 
     def create(self, budget):
         cursor = self.connection.cursor()
@@ -52,28 +55,25 @@ class BudgetingRepository:
             "insert into budgets (budget, user) values (?, ?)",
             (budget.budget, budget.user)
         )
-        
+
         self.connection.commit()
 
-    def add_new_expense(self, budget, expense, sum):
-        cursor = self.connection.cursor()
+        return budget
 
+    def add_new_expense(self, expense):
+        cursor = self.connection.cursor()
         cursor.execute(
-            "insert into expenses (budget, expense, sum) values (), ?, ?)",
-            (budget, expense, sum)
+            "insert into expenses (expense, budget, cost) values (?, ?, ?)",
+            (expense.expense, expense.budget, expense.cost)
         )
 
         self.connection.commit()
 
-    def delete_budget(self, budget):
+    def delete_all(self):
         cursor = self.connection.cursor()
 
-        cursor.execute("delete (budget) from budgets")
-
-        cursor.execute("deop table (budget)")
-
+        cursor.execute("delete from budgets")
 
         self.connection.commit()
-
 
 budgeting_repository = BudgetingRepository(get_database_connection())

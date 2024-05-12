@@ -10,11 +10,11 @@ def drop_tables(connection):
     cursor.execute("""
         drop table if exists budgets;
                   """)
-    
+
     cursor.execute("""
         drop table if exists expenses;
                   """)
-    
+
     connection.commit()
 
 
@@ -33,15 +33,15 @@ def create_tables(connection):
                 budget text,
                 user text); 
                    """)
-    
+
     cursor.execute("""
             create table expenses (
                 id SERIAL PRIMARY KEY,
-                budget text,
                 expense text,
-                sum integer); 
+                budget text,
+                cost integer); 
                    """)
-    
+
     connection.commit()
 
 
@@ -50,6 +50,7 @@ def initialize_database():
 
     drop_tables(connection)
     create_tables(connection)
+
 
 
 if __name__ == "__main__":

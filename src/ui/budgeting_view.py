@@ -1,47 +1,91 @@
 from tkinter import ttk, constants
 from services.user_service import user_service
-from services.login_service import login_service
 from services.budgeting_service import budgeting_service
 from repositories.budgeting_repository import budgeting_repository
-from ui.budget_view import BudgetView
+
 
 class BudgetListView:
-    def __init__(self, root, budgets, handle_open_budget):
+    def __init__(self, root, budgets):
         self.root = root
         self.budgets = budgets
-        self.handle_open_budget = handle_open_budget
+
         self.frame = None
+
+        self.add_for_budget_entry = None
+        self.add_expense_entry = None
+        self.add_cost_entry = None
 
         self.start()
 
     def start(self):
         self.frame = ttk.Frame(master=self.root)
 
-        for budget in self.budgets:
-            item_frame = ttk.Frame(master=self.frame)
-
+        for budget in self.budgets:      
+            item_frame = ttk.Frame(master=self.root)
             label = ttk.Label(master=item_frame, text=budget.budget)
-
-            add_new_expense_button = ttk.Button(
-                master=item_frame,
-                text="Open budget",
-                command=lambda: self.handle_open_budget(budget)
-            )
-
             label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
 
-            add_new_expense_button.grid(
-                row=0,
-                column=1,
-                padx=5,
-                pady=5,
-                sticky=constants.EW
-            )
+        self.expenses = budgeting_service.get_expenses(budget.budget)
+        if self.expenses:
+            for expense in self.expenses:
+                exp_frame = ttk.Frame(master=self.root)
 
-            item_frame.grid_columnconfigure(0, weight=1)
-            item_frame.pack(fill=constants.X)
+                exp_label = ttk.Label(master=exp_frame, text=expense.expense)
+                exp_label.grid(padx=5, pady=5, sticky=constants.W)
+
+                cost_label = ttk.Label(master=exp_frame, text=expense.cost)
+                cost_label.grid(padx=5, pady=5, sticky=constants.W)
+
+                exp_frame.grid_columnconfigure(2, weight=1)
+                exp_frame.pack(fill=constants.X)
+
+        item_frame.grid_columnconfigure(1, weight=1)
+        item_frame.pack(fill=constants.X)
 
 
+        add_expense_button = ttk.Button(
+            master=self.frame,
+            text="Add Expense",
+            command=self.handle_add_expense
+        )
+        
+        add_for_budget_label = ttk.Label(master=self.frame, text="Budget")
+        self.add_for_budget_entry = ttk.Entry(master=self.frame)
+    
+        add_for_budget_label.grid(padx=5, pady=5, sticky=constants.W)
+        self.add_for_budget_entry.grid(padx=5, pady=5, sticky=constants.W)
+          
+        add_expense_label = ttk.Label(master=self.frame, text="New expense")
+        self.add_expense_entry = ttk.Entry(master=self.frame)
+    
+        add_expense_label.grid(padx=5, pady=5, sticky=constants.W)
+        self.add_expense_entry.grid(padx=5, pady=5, sticky=constants.W)
+    
+        add_cost_label = ttk.Label(master=self.frame, text="cost")
+        self.add_cost_entry = ttk.Entry(master=self.frame)
+        
+        add_cost_label.grid(padx=5, pady=5, sticky=constants.W)
+        self.add_cost_entry.grid(padx=5, pady=5, sticky=constants.W)
+
+        add_expense_button.grid(
+            row=0,
+            column=1,
+            padx=5,
+            pady=5,
+            sticky=constants.EW
+        )
+
+
+    def handle_add_expense(self):
+        expense = self.add_expense_entry.get()
+        budget = self.add_for_budget_entry.get()
+        cost = self.add_cost_entry.get()
+
+        if expense and budget and cost:
+            budgeting_service.add_new_expense(expense, budget, cost)
+            self.add_expense_entry.delete(0, constants.END)
+            self.add_for_budget_entry.delete(0, constants.END)
+            self.add_cost_entry.delete(0, constants.END)
 
     def pack(self):
         self.frame.pack(fill=constants.X)
@@ -67,6 +111,7 @@ class BudgetingView:
 
     def start(self):
         self.frame = ttk.Frame(master=self.root)
+
         self.budget_list_frame = ttk.Frame(master=self.frame)
 
         self.header()
@@ -74,13 +119,13 @@ class BudgetingView:
         self.footer()
 
         self.budget_list_frame.grid(
-            row=2,
-            column=1,
+            row=4,
+            column=0,
             columnspan=3,
             sticky=constants.EW
         )
 
-        self.frame.grid_columnconfigure(0, weight=1, minsize=1900)
+        self.frame.grid_columnconfigure(0, weight=1, minsize=500)
         self.frame.grid_columnconfigure(1, weight=0)
 
 
@@ -111,15 +156,12 @@ class BudgetingView:
         if self.budget_list_view:
             self.budget_list_view.destroy()
 
-        budgets = budgeting_service.get_budgets()
-        print(budgets)
+        budgets = budgeting_service.get_budgets(self.user.username)
 
         if budgets:
-
             self.budget_list_view = BudgetListView(
                 self.budget_list_frame,
                 budgets,
-                self.handle_open_budget
             )
 
             self.budget_list_view.pack()
@@ -128,23 +170,13 @@ class BudgetingView:
             self.handle_create_budget
 
 
-    def handle_add_new_expense(self, budget):
-        expense = self.expense_entry.get()
-        sum = self.sum_entry.get()
-
-        if expense and sum:
-            budgeting_service.add_new_expense(budget, expense, sum)
-            expense = self.add_new_expense.delete()
-            sum = self.enter_sum.delete()
-
-        self.budget_list()
-
 
     def handle_create_budget(self):
         budget = self.create_new_budget.get()
 
         if budget:
             budgeting_service.create_budget(budget, self.user.username)
+            self.budget_list
             self.create_new_budget.delete(0, constants.END)
 
         self.budget_list()
@@ -176,7 +208,7 @@ class BudgetingView:
         )
 
     def logout_handler(self):
-        login_service.logout()
+        user_service.logout()
         self.handle_logout()
 
 

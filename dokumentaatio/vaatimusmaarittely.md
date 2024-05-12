@@ -10,7 +10,7 @@
 ### Ennen kirjautumista
 - Käyttäjä voi luoda järjestelmään user-tason käyttäjätunnuksen 
 	- Sovellus hyväksyy uniikit, yli viisi merkkiä pitkät käyttäjänimet
-	- Salasanan tulee olla vähintään kahdeksan merkkiä pitkä ja sisältää sekä pieniä, että suuria kirjaimia 
+	- Salasanan tulee olla vähintään kahdeksan merkkiä pitkä
 - Käyttäjä voi olemassa olevilla tunnuksilla kirjautua järjestelmään syöttämällä etusivulle käyttäjätunnuksen ja salasanan
 
  

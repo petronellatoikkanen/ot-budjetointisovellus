@@ -1,7 +1,6 @@
 from ui.create_user_view import CreateUserView
 from ui.login_view import LoginView
 from ui.budgeting_view import BudgetingView
-from ui.budget_view import BudgetView
 
 
 class UI:
@@ -11,7 +10,6 @@ class UI:
 
     def start(self):
         self.show_login_view()
-
 
     def hide_current_view(self):
         if self._current_view:
@@ -39,7 +37,6 @@ class UI:
         )
 
         self._current_view.pack()
-
 
     def show_create_user_view(self):
         self.hide_current_view()
