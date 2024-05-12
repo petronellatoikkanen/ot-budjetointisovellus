@@ -1,29 +1,15 @@
-# Vaatimusmäärittely
+# Testaus
 
-## Sovelluksen tarkoitus
-- Sovelluksen avulla käyttäjät voivat luoda omia yksityisiä sekä toisten käyttäjien kanssa yhteisiä budjettimalleja eri tarkoituksiin
+## Sovelluksen testaus
+- Sovelluksen testaus on jaettu services ja repositories tasolla. UserService-luokkaa testataan TestUserService-luokalla ja BudgetinService-luokkaa TestBudgetinService-luokalla. Vastaavasti UserRepository-luokkaa testataan TestUserRepository-luokalla ja BudgetingRepository-luokkaa TestBudgetinRepository-luokalla.
 
-## Käyttäjät
-- Sovelluksessa on tarkoitus olla kaksi eri käyttäjäroolia, normaali käyttäjä (user) ja pääkäyttäjä (admin)
+## Testauskattavuus
+- Sovelluksen testikattavuus on 82%, huomioiden repositories, entities sekä services kansioiden sisällön. 
 
-## Suunnitellut toiminnallisuudet
-### Ennen kirjautumista
-- Käyttäjä voi luoda järjestelmään user-tason käyttäjätunnuksen (tehty)
-	- Sovellus hyväksyy uniikit, yli viisi merkkiä pitkät käyttäjänimet
-	- Salasanan tulee olla vähintään kahdeksan merkkiä pitkä ja sisältää sekä pieniä, että suuria kirjaimia 
-- Käyttäjä voi olemassa olevilla tunnuksilla kirjautua järjestelmään syöttämällä etusivulle käyttäjätunnuksen ja salasanan
 
- 
-### Kirjautumisen jälkeen
-- Käyttäjä näkee omat budjettisuunnitelmansa etusivulla
-	- Käyttäjän on mahdollista järjestää omat budjettisuunnitelmansa aakkosittain tai viimeksi muokattu -tiedon mukaan
-- Käyttäjällä on mahdollisuus siirtyä katsomaan ja muokkaamaan olemassa olevaa budjettia
-- Käyttäjällä on mahdollisuus luoda uusi budjettisuunnitelma sekä poistaa omia olemassa olevia suunnitelmiaan
-- Käyttäjällä on mahdollisuus siirtyä katsomaan omia tietojaan ja kirjautua ulos
+Lisäksi järjestelmää on testattu manuaalisesti ohjelman asennuksen ja käynnistyksen jälkeen. Ohjelmaan on jäänyt ongelma kustannuksien listaamisesta budjetointinäkymässä. 
 
-- Sovelluksesta löytyy valmiina budjettimallipohjia, joista käyttäjät voivat tallentaa itselleen käyttöön
-- Yhteisissä, jaetuissa budjeteissa on mahdollista jättää kommentteja
-	- Omia kommentteja on mahdollista muokata ja poistaa jälkikäteen
- 
+Testit saa ajettua komennolla poetry run invoke test ja testiraportin komennolla poetry run invoke coverage-report
+
 
 

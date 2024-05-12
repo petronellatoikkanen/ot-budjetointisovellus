@@ -18,7 +18,7 @@ class BudgetingService:
         self.budget = self.budgeting_repository.create(Budget(budget, username))
         return self.budget
 
-    def add_new_expense(self, budget, expense, cost):
+    def add_new_expense(self, expense, budget, cost):
         return self.budgeting_repository.add_new_expense(Expense(expense, budget, cost))
 
     def get_expenses(self, budget):

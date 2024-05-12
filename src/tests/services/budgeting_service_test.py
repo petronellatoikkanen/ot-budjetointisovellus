@@ -6,8 +6,9 @@ from services.budgeting_service import BudgetingService
 from services.user_service import user_service
 
 class FakeBudgetingRepository:
-    def __init__(self, budgets=None):
+    def __init__(self, budgets=None, expenses=None):
         self.budgets = budgets or []
+        self.expenses = expenses or []
 
     def find_all(self):
         return self.todos
@@ -27,8 +28,14 @@ class FakeBudgetingRepository:
 
         return budget
 
+    def add_new_expense(self, expense):
+        self.expenses.append(expense)
+
+        return expense
+    
     def delete_all(self):
-        self.users = []
+        self.budgets = []
+        self.expenses = []
   
 
 class TestBudgetingService(unittest.TestCase):
@@ -36,7 +43,8 @@ class TestBudgetingService(unittest.TestCase):
         self.budgeting_service = BudgetingService(FakeBudgetingRepository())
         self.user = User('testi2', 'testi123')
         self.budget = Budget('testibudjetti', 'testi')
-
+        self.expense = Expense('testiexpense', 'testibudjetti', '100')
+    
     def login_user(self, user):
         user_service.create_user(user.username, user.password)
 
@@ -46,3 +54,8 @@ class TestBudgetingService(unittest.TestCase):
         budget = self.budgeting_service.create_budget(self.budget.budget, self.budget.user)
 
         self.assertEqual(budget.budget, self.budget.budget)
+
+    def test_add_new_expense(self):
+        expense = self.budgeting_service.add_new_expense(self.expense.expense, self.expense.budget, self.expense.cost)
+
+        self.assertEqual(expense.expense, self.expense.expense)

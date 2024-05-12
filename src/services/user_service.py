@@ -11,7 +11,7 @@ class InvalidCredentialsError(Exception):
 class UserService:
     def __init__(self,user_repository=default_user_repository):
         self.user = None
-        self.user_repository = default_user_repository
+        self.user_repository = user_repository
 
     def login(self, username, password):
         user = self.user_repository.find_user(username)

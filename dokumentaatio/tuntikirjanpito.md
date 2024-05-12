@@ -12,3 +12,5 @@
 | 8.5.  |  10  | views, database, bugien korjaus |
 | 9.5.  |  2   | bugien korjaus |
 | 10.5. |  5   | arkkitehtuuri.md, käyttöohje.md, testaus.md, dokumentaatio päivitys |
+| 11.5. |  10   | testaus, pylint, näkymät |
+| 12.5. |  10   | testaus, viimeistely |

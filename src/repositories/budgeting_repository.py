@@ -16,7 +16,7 @@ class BudgetingRepository:
         cursor = self.connection.cursor()
 
         cursor.execute(
-            "select from budgets where user = ?",
+            "select * from budgets where user = ?",
             (username,)
         )
 
@@ -68,6 +68,8 @@ class BudgetingRepository:
         )
 
         self.connection.commit()
+
+        return expense
 
     def delete_all(self):
         cursor = self.connection.cursor()

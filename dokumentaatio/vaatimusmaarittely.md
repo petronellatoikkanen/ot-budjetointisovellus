@@ -16,8 +16,8 @@
  
 ### Kirjautumisen jälkeen
 - Käyttäjä näkee omat budjettisuunnitelmansa etusivulla
-- Käyttäjällä on mahdollisuus siirtyä katsomaan ja muokkaamaan olemassa olevaa budjettia
-- Käyttäjällä on mahdollisuus luoda uusi budjettisuunnitelma sekä poistaa omia olemassa olevia suunnitelmiaan
+- Käyttäjällä on mahdollisuus luoda uusi budjettisuunnitelma
+- Käyttäjällä on mahdollisuus lisätä kuluja budjettisuunnitelmaan
 - Käyttäjällä on mahdollisuus kirjautua ulos
 
 
